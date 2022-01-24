@@ -1,12 +1,13 @@
 package app;
 
 import service.CityService;
+import service.impl.CityServiceImpl;
 
 import java.util.Scanner;
 
 public class Application {
 
-    private final CityService cityService = new CityService();
+    private final CityService cityService = new CityServiceImpl();
 
     public void run() {
         // Класс Scanner нужен для чтения данных из входящих потоков. Это может быть консоль приложения, файл и т.д.
