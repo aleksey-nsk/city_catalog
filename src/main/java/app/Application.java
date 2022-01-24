@@ -6,40 +6,52 @@ import java.util.Scanner;
 
 public class Application {
 
-    private static final CityService cityService = new CityService();
+    private final CityService cityService = new CityService();
 
-    public static void run() {
+    public void run() {
+        // Класс Scanner нужен для чтения данных из входящих потоков. Это может быть консоль приложения, файл и т.д.
+        // Внутри скобок передаём (System.in) так как необходимо, чтобы сканер считывал данные из консоли
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
             showMenu();
 
+            // Метод nextLine() обращается к источнику данных, и считывает строку
             String command = scanner.nextLine();
 
-            if (command.equals("1")) {
-                cityService.uploadData();
-            } else if (command.equals("2")) {
-                cityService.printAll();
-            } else if (command.equals("3")) {
-                cityService.cleanTable();
-            } else if (command.equals("4")) {
-                cityService.sortByNameDesc();
-            } else if (command.equals("5")) {
-                cityService.sortByDistrictAndNameDesc();
-            } else if (command.equals("6")) {
-                cityService.printCityWithMaxPopulation();
-            } else if (command.equals("7")) {
-                cityService.printCitiesByRegion();
-            } else if (command.equals("exit")) {
-                System.out.println("Пока!");
-                return;
-            } else {
-                System.out.println("Неизвестная команда");
+            switch (command) {
+                case "1":
+                    cityService.uploadData();
+                    break;
+                case "2":
+                    cityService.printAll();
+                    break;
+                case "3":
+                    cityService.cleanTable();
+                    break;
+                case "4":
+                    cityService.sortByNameDesc();
+                    break;
+                case "5":
+                    cityService.sortByDistrictAndNameDesc();
+                    break;
+                case "6":
+                    cityService.printCityWithMaxPopulation();
+                    break;
+                case "7":
+                    cityService.printCitiesByRegion();
+                    break;
+                case "exit":
+                    System.out.println("Выход");
+                    return;
+                default:
+                    System.out.println("Неизвестная команда");
+                    break;
             }
         }
     }
 
-    private static void showMenu() {
+    private void showMenu() {
         System.out.println();
         System.out.println("********************************************************************");
         System.out.println("*               ВЫБЕРИТЕ ТРЕБУЕМОЕ ДЕЙСТВИЕ                        *");

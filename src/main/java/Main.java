@@ -3,6 +3,7 @@ import app.Application;
 public class Main {
 
     public static void main(String[] args) {
-        Application.run();
+        Application application = new Application();
+        application.run();
     }
 }

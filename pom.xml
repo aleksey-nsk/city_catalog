@@ -14,12 +14,12 @@
     </properties>
 
     <dependencies>
-        <!-- H2 Database -->
-        <!--        <dependency>-->
-        <!--            <groupId>com.h2database</groupId>-->
-        <!--            <artifactId>h2</artifactId>-->
-        <!--            <version>1.4.196</version>-->
-        <!--        </dependency>-->
+        <!-- PostgreSQL JDBC Driver -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.18</version>
+        </dependency>
     </dependencies>
 
 </project>

@@ -3,11 +3,11 @@ package model;
 public class City {
 
     private Long id;
-    private String name;
-    private String region;
-    private String district;
-    private Long population;
-    private Integer foundation;
+    private String name;        // наименование города
+    private String region;      // регион
+    private String district;    // федеральный округ
+    private Long population;    // количество жителей города
+    private Integer foundation; // дата основания или первое упоминание
 
     public City() {
     }
@@ -23,10 +23,6 @@ public class City {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {

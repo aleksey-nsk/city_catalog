@@ -13,40 +13,41 @@ import java.util.stream.Collectors;
 
 public class CityService {
 
-    private static final CityDao cityDao = new CityDao();
+    private final CityDao cityDao = new CityDao();
 
     public void uploadData() {
-        City city = new City();
-
         try {
-            FileReader fileReader = new FileReader("./my_file/cities.csv");
+            FileReader fileReader = new FileReader("./files/cities.csv");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line;
 
             while ((line = bufferedReader.readLine()) != null) {
-                System.out.println("Одна строка из файла: " + line);
-                String tmp[] = line.split(";");
-                city.setName(tmp[0]);
-                city.setRegion(tmp[1]);
-                city.setDistrict(tmp[2]);
-                city.setPopulation(Long.parseLong(tmp[3]));
-                city.setFoundation(Integer.parseInt(tmp[4]));
-                System.out.println("Один объект типа City: " + city);
-                if (cityDao.isCityExistByNameAndRegion(city)) {
-                    System.out.println("В базе уже существует город с таким именем и регионом!\n");
-                } else {
+//                System.out.println("Одна строка из файла: " + line);
+                String[] temp = line.split(";");
+                City city = new City();
+                city.setName(temp[0]);
+                city.setRegion(temp[1]);
+                city.setDistrict(temp[2]);
+                city.setPopulation(Long.parseLong(temp[3]));
+                city.setFoundation(Integer.parseInt(temp[4]));
+//                System.out.println("Один объект типа City: " + city);
+                if (!cityDao.isCityExistByNameAndRegion(city)) {
                     cityDao.save(city);
+                } else {
+//                    System.out.println("В базе уже существует город с таким именем и регионом!\n");
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        System.out.println("Города были загружены из файла в БД");
     }
 
     public void printAll() {
         List<City> all = cityDao.findAll();
 
-        System.out.println("All cities:");
+        System.out.println("Список всех городов:");
         for (City city : all) {
             System.out.println("  " + city);
         }
@@ -54,19 +55,19 @@ public class CityService {
 
     public void cleanTable() {
         cityDao.deleteAll();
-        System.out.println("Table was cleaned");
+        System.out.println("Таблица очищена");
     }
 
     public void sortByNameDesc() {
         List<City> all = cityDao.findAll();
 
-        Comparator<City> nameComparatorDescIgnoreCase = (o1, o2) -> o2.getName().compareToIgnoreCase(o1.getName());
+        Comparator<City> nameComparator = (o1, o2) -> o2.getName().compareToIgnoreCase(o1.getName());
 
         List<City> sortedList = all.stream()
-                .sorted(nameComparatorDescIgnoreCase)
+                .sorted(nameComparator)
                 .collect(Collectors.toList());
 
-        System.out.println("All cities sorted by name desc:");
+        System.out.println("Список городов, отсортированный по наименованию:");
         for (City city : sortedList) {
             System.out.println("  " + city);
         }
@@ -75,14 +76,14 @@ public class CityService {
     public void sortByDistrictAndNameDesc() {
         List<City> all = cityDao.findAll();
 
-        Comparator<City> districtComparatorDesc = (o1, o2) -> o2.getDistrict().compareTo(o1.getDistrict());
-        Comparator<City> nameComparatorDesc = (o1, o2) -> o2.getName().compareTo(o1.getName());
+        Comparator<City> districtComparator = (o1, o2) -> o2.getDistrict().compareTo(o1.getDistrict());
+        Comparator<City> nameComparator = (o1, o2) -> o2.getName().compareTo(o1.getName());
 
         List<City> sortedList = all.stream()
-                .sorted(districtComparatorDesc.thenComparing(nameComparatorDesc))
+                .sorted(districtComparator.thenComparing(nameComparator))
                 .collect(Collectors.toList());
 
-        System.out.println("All cities sorted by district and name desc:");
+        System.out.println("Список городов, отсортированный по фед. округу и наименованию:");
         for (City city : sortedList) {
             System.out.println("  " + city);
         }
@@ -91,17 +92,16 @@ public class CityService {
     public void printCityWithMaxPopulation() {
         List<City> all = cityDao.findAll();
 
-        Comparator<City> populationComparatorDesc = (o1, o2) -> o2.getPopulation().compareTo(o1.getPopulation());
+        Comparator<City> populationComparator = (o1, o2) -> o2.getPopulation().compareTo(o1.getPopulation());
 
         List<City> sortedList = all.stream()
-                .sorted(populationComparatorDesc)
+                .sorted(populationComparator)
                 .collect(Collectors.toList());
 
-        System.out.println("City with max population:");
-
+        System.out.println("Город с наибольшим количеством жителей:");
         if (sortedList.size() != 0) {
             City cityWithMaxPopulation = sortedList.get(0);
-            System.out.println("  " + cityWithMaxPopulation);
+//            System.out.println("  " + cityWithMaxPopulation);
             System.out.printf("  [%d] = %d %n", cityWithMaxPopulation.getId(), cityWithMaxPopulation.getPopulation());
         }
     }
@@ -114,8 +114,8 @@ public class CityService {
         );
 
         System.out.println("Количество городов в разрезе регионов:");
-        for (Map.Entry<String, Long> group : citiesByRegion.entrySet()) {
-            System.out.println("  " + group.getKey() + " - " + group.getValue());
+        for (String region : citiesByRegion.keySet()) {
+            System.out.println("  " + region + " - " + citiesByRegion.get(region));
         }
     }
 }
