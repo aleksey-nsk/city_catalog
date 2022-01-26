@@ -8,9 +8,9 @@ import java.util.List;
 
 public class CityDao {
 
-    private static final String DB_URL = "jdbc:postgresql://localhost:5432/city_catalog";
-    private static final String DB_USERNAME = "postgres";
-    private static final String DB_PASSWORD = "123";
+    private static final String DB_URL = "jdbc:postgresql://localhost:15432/postgres";
+    private static final String DB_USERNAME = "sa";
+    private static final String DB_PASSWORD = "";
 
     public CityDao() {
         String sqlCreate = "create table if not exists city\n" +
