@@ -77,8 +77,6 @@ Docker-compose работает с сервисами (1 сервис = 1 кон
 8. Далее настроить подключение к БД на вкладке Database:  
 ![](https://github.com/aleksey-nsk/city_catalog/blob/master/screenshots/05_data_source.png)  
 9. Готово. Далее можно запустить приложение.
-10. [Инструкция](https://javarush.ru/groups/posts/3688-kak-razvernutjh-postgres-v-docker-i-podkljuchitjh-ee-k-spring-boot-prilozheniju) по
-разворачиванию Postgres в Docker.
 
 # Ещё инфа про Docker
 - [Мануал по основам Docker](https://habr.com/ru/company/ruvds/blog/438796/)
