@@ -82,3 +82,4 @@ Docker-compose работает с сервисами (1 сервис = 1 кон
 - [Мануал по основам Docker](https://habr.com/ru/company/ruvds/blog/438796/)
 - [Основные команды Docker](https://timeweb.com/ru/community/articles/osnovnye-komandy-docker)
 - [Видео по работе с Docker в IntelliJ IDEA](https://www.youtube.com/watch?v=ck6xQqSOlpw)
+
