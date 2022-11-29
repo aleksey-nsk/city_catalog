@@ -60,17 +60,17 @@ Docker-compose работает с сервисами (1 сервис = 1 кон
 `POSTGRES_USER=sa` - это пользователь, который будет логиниться;  
 `POSTGRES_HOST_AUTH_METHOD=trust` - чтобы логиниться в базу без указания пароля;  
 `POSTGRES_DB=java` - название БД, которая будет создана.  
-**Для запуска нажать зелёную стрелку на одной строке с postgres (строчка 4 на скриншоте)**.
+**Для запуска нажать зелёную стрелку на одной строке с db (строчка 4 на скриншоте)**.
 6. В нижней части IntelliJ IDEA во **вкладке Services** будет отображаться процесс:  
 ![](https://github.com/aleksey-nsk/city_catalog/blob/master/screenshots/02_start_docker.png)  
 В итоге отобразится следующая информация:  
 ![](https://github.com/aleksey-nsk/city_catalog/blob/master/screenshots/03_docker_running.png)  
-Это значит, что в **сервисе postgres** поднялся **контейнер java-postgres**.
+Это значит, что в **сервисе db** поднялся **контейнер java-postgres**.
 В папке Images должен быть **образ postgres:13**. В консоли можно увидеть образ, контейнер и том:  
 ![](https://github.com/aleksey-nsk/city_catalog/blob/master/screenshots/04_image_container_volume.png)   
 7. В **dao-слое** должны использоваться следующие значения:
 
-       DB_URL = "jdbc:postgresql://localhost:15432/postgres";
+       DB_URL = "jdbc:postgresql://localhost:15432/java";
        DB_USERNAME = "sa";
        DB_PASSWORD = "";
 
