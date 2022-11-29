@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CityDao {
 
-    private static final String DB_URL = "jdbc:postgresql://localhost:15432/postgres";
+    private static final String DB_URL = "jdbc:postgresql://localhost:15432/java";
     private static final String DB_USERNAME = "sa";
     private static final String DB_PASSWORD = "";
 
